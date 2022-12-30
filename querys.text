@@ -25,4 +25,5 @@ VALUES
    SELECT 
         *
    FROM 
-        todo;
+        todo
+   WHERE todo LIKE '%play%'
