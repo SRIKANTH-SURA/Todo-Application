@@ -31,3 +31,7 @@ Content-Type: application/json
   "priority": "LOW",
   "status": "TO DO"
 }
+
+###
+
+DELETE http://localhost:3000/todos/12

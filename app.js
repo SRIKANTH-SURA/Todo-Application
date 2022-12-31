@@ -115,10 +115,34 @@ app.post("/todos/", async (request, response) => {
   const { id, todo, priority, status } = request.body;
   const postTodoQuery = `
         INSERT INTO
-            (id, todo, priority, status)
+           todo (id, todo, priority, status)
         VALUES
-            (${id}, '${todo}', '${priority}', '${status})';
+            (${id}, '${todo}', '${priority}', '${status}');
   `;
   await db.run(postTodoQuery);
   response.send("Todo Successfully Added");
 });
+
+// API 4
+
+// app.put("todos/:todoId", async (request, response) => {
+//     const { todoId } = request.params;
+//     let updateColumn = ""'
+//     const request
+// });
+
+// API 5
+
+app.delete("/todos/:todoId/", async (request, response) => {
+  const { todoId } = request.params;
+  const deleteQuery = `
+        DELETE FROM
+            todo
+        WHERE 
+            id = ${todoId};
+    `;
+  await db.run(deleteQuery);
+  response.send("Todo Deleted");
+});
+
+module.exports = app;
