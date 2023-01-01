@@ -123,13 +123,50 @@ app.post("/todos/", async (request, response) => {
   response.send("Todo Successfully Added");
 });
 
-// API 4
+// API 4 (PUT)  Updates the details of a specific todo based on the todo ID
 
-// app.put("todos/:todoId", async (request, response) => {
-//     const { todoId } = request.params;
-//     let updateColumn = ""'
-//     const request
-// });
+app.put("/todos/:todoId/", async (request, response) => {
+  const { todoId } = request.params;
+  const requestBody = request.body;
+  let updateColumn = "";
+  switch (true) {
+    case requestBody.status !== undefined:
+      updateColumn = "Status";
+      break;
+    case requestBody.priority !== undefined:
+      updateColumn = "Priority";
+      break;
+    case requestBody.todo !== undefined:
+      updateColumn = "Todo";
+      break;
+    default:
+      break;
+  }
+
+  const getTodoQuery = `
+            SELECT *
+            FROM todo
+            WHERE id = ${todoId};
+    `;
+  const previousTodo = await db.get(getTodoQuery);
+  //   response.send(previousTodo);
+  const {
+    todo = previousTodo.todo,
+    priority = previousTodo.priority,
+    status = previousTodo.status,
+  } = request.body;
+  const updateTodoObjQuery = `
+            UPDATE
+                todo
+            SET
+                todo = '${todo}',
+                priority = '${priority}',
+                status = '${status}'
+            WHERE id = ${todoId};
+      `;
+  await db.run(updateTodoObjQuery);
+  response.send(`${updateColumn} Updated`);
+});
 
 // API 5
 

@@ -18,7 +18,7 @@ GET http://localhost:3000/todos/?search_q=play
 
 ###
 
-GET http://localhost:3000/todos/3
+GET http://localhost:3000/todos/3/
 
 ###
 
@@ -30,6 +30,33 @@ Content-Type: application/json
   "todo": "Finalize event theme",
   "priority": "LOW",
   "status": "TO DO"
+}
+
+###
+
+PUT http://localhost:3000/todos/3/
+Content-Type: application/json
+
+{
+    "status" : "DONE"
+}
+
+###
+
+PUT http://localhost:3000/todos/3/
+Content-Type: application/json
+
+{
+    "priority" : "HIGH"
+}
+
+###
+
+PUT http://localhost:3000/todos/3/
+Content-Type: application/json
+
+{
+    "todo" : "Coding Practice"
 }
 
 ###
